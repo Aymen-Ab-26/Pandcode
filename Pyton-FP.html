@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="code.js"></script>
+    <script src="cordova.js"></script>
+
+</head>
+<body>
+    <header>
+        <div class="wrapper">
+            <div class="cours_title">
+                <h1 class="tit">
+                    Fonctions et Procédures en Python
+                </h1>
+            </div>
+        
+    </div>
+        <a class="fl" href="cours-FP.html">
+          <img class="img2" src="panda_bamb.png"  alt="">
+        </a>
+    </header>
+
+    <h1>
+        En Python
+    </h1>
+En Python, il n’y a pas de différence entre une procédure et une fonction. Elles sont en fait très similaires et fonctionnent comme un mélange des deux. <br>
+
+<h2>La syntaxe:</h2>
+<img class="py" src="Python-FP.png" alt="">
+<button  class="syntax_buttons"id="openImageBtn_Py">Ouvrir image dans galerie</button> <br><br>
+
+On peut ajouter une instruction return si on veut retourner une valeur, ou ne rien mettre du tout si ce n’est pas nécessaire. <br>
+Il n’est pas nécessaire de déclarer les types des variables ni le type du retour. <br>
+Et surtout, il n’y a pas de TDO en python. <br> <br> <br>
+
+<script>
+  document.addEventListener("deviceready", function () {
+    function openImageFromWww(buttonId, fileName) {
+      const srcPath = cordova.file.applicationDirectory + "www/" + fileName;
+      const destDir = cordova.file.dataDirectory;
+
+      function copyFile(src, dest, callback) {
+        window.resolveLocalFileSystemURL(src, function (fileEntry) {
+          window.resolveLocalFileSystemURL(dest, function (dirEntry) {
+            fileEntry.copyTo(dirEntry, fileName, function (newFileEntry) {
+              callback(null, newFileEntry.nativeURL);
+            }, callback);
+          }, callback);
+        }, callback);
+      }
+
+      const button = document.getElementById(buttonId);
+      if (button) {
+        button.addEventListener("click", function () {
+          copyFile(srcPath, destDir, function (err, copiedFileUrl) {
+            if (err) {
+              alert("Erreur de copie : " + JSON.stringify(err));
+              return;
+            }
+            cordova.plugins.fileOpener2.open(
+              copiedFileUrl,
+              "image/png",
+              {
+                success: function () {
+                  console.log("Image ouverte avec succès: " + fileName);
+                },
+                error: function (e) {
+                  alert("Erreur d'ouverture : " + JSON.stringify(e));
+                }
+              }
+            );
+          });
+        });
+      }
+    }
+
+    // 👇 Use the function here for each image
+    openImageFromWww("openImageBtn_Py", "Python-FP.png");
+  });
+</script>
+</body>
+</html>

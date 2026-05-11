@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="code.js"></script>
+    <script src="cordova.js"></script>
+    
+</head>
+<body class="fade">
+    <header>
+        <div class="wrapper">
+        
+        <div class="cours_title">
+            <h1 class="tit">
+                QT Designer
+            </h1>
+        </div>
+    </div>
+        <a class="fl" href="cours.html">
+          <img class="img2" src="panda_bamb.png"  alt="">
+        </a>
+    </header>
+    <span class="clr">QT Designer</span>est un programme utilisé pour créer une <span class="clr">interface utilisateur</span>  (semblable à un site web), qui est reliée à un programme Python. <br> <br>
+En gros, l’utilisateur peut <span class="clr">interagir</span>  avec le code en cliquant sur des <span class="clr">boutons</span> ,  <span class="clr">la saise des données</span>, etc. <br> <br>
+
+<h2>structure</h2>
+La structure habituelle d’un code créé avec QT Designer est différente d’un code Python classique.
+
+<h3 style="color:rgb(108, 8, 8)">Chaque code QT Designer doit commencer par ces deux lignes
+</h3>
+    <img src="QT-top.png" class="Intro-Ex-Pc" alt="">
+    <button  class="syntax_buttons"id="openImageBtn_qttop">Ouvrir image dans galerie</button> <br>
+    
+    
+    Ensuite, vous codez vos fonctions comme d’habitude, sauf que les données ne seront pas récupérées avec : <br><br>
+    <span style="color:rgb(132, 13, 13);font-style: italic;">
+        Variable_Name = int(input("Donner ..."))
+    </span> <br> <br> <br>
+    À la place, cela ressemblera plutôt à ceci : <br> <br>
+    <span style="color:rgb(13, 123, 13);font-weight: bold;font-size:85%;">
+        Container_Text = win.Line_Edit_Name.text() <br>
+        Variable_Name = int(Container_Text)
+    </span> <br> 
+    <i> Et bien sûr, si vous avez des conditions, vous pouvez les coder normalement.</i> <br>
+    
+    <h2>
+        Connexion des fonctions :
+    </h2>
+    
+    Pour connecter une fonction au clic sur un bouton, il suffit d’écrire cette ligne : <br> <br>
+    <span style="color:rgb(59, 59, 246);font-weight: bold;font-size:85%; ">
+        win.Nom_Bouton.clicked.connect ( Nom_Fonction )
+    </span> <br> <br>
+    exemple : <br> <br>
+    <span style="color:rgb(121, 123, 13);font-weight: bold;font-size:85%;">
+        win.Button_Premier.clicked.connect ( EstPremier )
+    </span> <br> <br>
+    Bien sûr, toutes les connexions des boutons se font en bas du code dans ce bloc : <br>
+    <img src="QT-bottom.png" class="Intro-Ex-Pc" alt="">
+    <button  class="syntax_buttons"id="openImageBtn_qtbot">Ouvrir image dans galerie</button> <br>
+<script>
+  document.addEventListener("deviceready", function () {
+    function openImageFromWww(buttonId, fileName) {
+      const srcPath = cordova.file.applicationDirectory + "www/" + fileName;
+      const destDir = cordova.file.dataDirectory;
+
+      function copyFile(src, dest, callback) {
+        window.resolveLocalFileSystemURL(src, function (fileEntry) {
+          window.resolveLocalFileSystemURL(dest, function (dirEntry) {
+            fileEntry.copyTo(dirEntry, fileName, function (newFileEntry) {
+              callback(null, newFileEntry.nativeURL);
+            }, callback);
+          }, callback);
+        }, callback);
+      }
+
+      const button = document.getElementById(buttonId);
+      if (button) {
+        button.addEventListener("click", function () {
+          copyFile(srcPath, destDir, function (err, copiedFileUrl) {
+            if (err) {
+              alert("Erreur de copie : " + JSON.stringify(err));
+              return;
+            }
+            cordova.plugins.fileOpener2.open(
+              copiedFileUrl,
+              "image/png",
+              {
+                success: function () {
+                  console.log("Image ouverte avec succès: " + fileName);
+                },
+                error: function (e) {
+                  alert("Erreur d'ouverture : " + JSON.stringify(e));
+                }
+              }
+            );
+          });
+        });
+      }
+    }
+
+    // 👇 Use the function here for each image
+    openImageFromWww("openImageBtn_qttop", "QT-top.png");
+    openImageFromWww("openImageBtn_qtbot", "QT-bottom.png");
+  });
+</script>
+</body>
+</html>

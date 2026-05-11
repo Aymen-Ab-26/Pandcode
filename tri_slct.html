@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="code.js"></script>
+    
+</head>
+<body class="fade">
+    <header>
+        <div class="wrapper">
+        
+        <div class="cours_title">
+            <h1 class="tit">
+                Tri a bulles
+            </h1>
+        </div>
+    </div>
+        <a class="fl" href="cours-tri.html">
+          <img class="img2" src="panda_bamb.png"  alt="">
+        </a>
+    </header>
+
+    Le <span class="clr">tri par sélection</span>  est un autre type d’algorithme de tri, plus efficace que le tri à bulles.
+    <h1>
+        L’idée générale (pour un tri croissant):
+    </h1>
+mettre le plus petit nombre à la première position, le deuxième plus petit à la deuxième position, etc. <br>
+
+<h2>
+    Comment fait-on cela en code ?
+</h2>
+
+À chaque fois qu’on parcourt le tableau, on garde en mémoire le plus petit nombre trouvé jusqu’à présent,
+et à la fin du parcours, on le place à sa position correcte. <br>
+
+<div style="width:100%;display: flex; justify-content: space-around;">
+    <button   class="vidCtrls"id="vidPlay" onclick="PlayPause()">Play/Pause</button>
+    <button class="vidCtrls"id="vidReset" onclick="Reset()">Reset</button>
+</div>
+<video src="Selection.mp4" muted id="vid_rech_dich"></video>
+
+<h1>Code algo:</h1> <br>
+<img src="Ex-tri-bul.png" class="Intro-Ex-Pc" alt=""> <br>
+<button  class="syntax_buttons"id="openImageBtn_extrislct">Ouvrir image dans galerie</button> <br> <br>
+<h1>
+    Python :
+</h1>
+<img src="Ex-tri-bul-py.png" class="Intro-Ex-Pc" alt=""> <br>
+<button  class="syntax_buttons"id="openImageBtn_extrislctpy">Ouvrir image dans galerie</button> <br> <br>
+
+<script>
+  document.addEventListener("deviceready", function () {
+    function openImageFromWww(buttonId, fileName) {
+      const srcPath = cordova.file.applicationDirectory + "www/" + fileName;
+      const destDir = cordova.file.dataDirectory;
+
+      function copyFile(src, dest, callback) {
+        window.resolveLocalFileSystemURL(src, function (fileEntry) {
+          window.resolveLocalFileSystemURL(dest, function (dirEntry) {
+            fileEntry.copyTo(dirEntry, fileName, function (newFileEntry) {
+              callback(null, newFileEntry.nativeURL);
+            }, callback);
+          }, callback);
+        }, callback);
+      }
+
+      const button = document.getElementById(buttonId);
+      if (button) {
+        button.addEventListener("click", function () {
+          copyFile(srcPath, destDir, function (err, copiedFileUrl) {
+            if (err) {
+              alert("Erreur de copie : " + JSON.stringify(err));
+              return;
+            }
+            cordova.plugins.fileOpener2.open(
+              copiedFileUrl,
+              "image/png",
+              {
+                success: function () {
+                  console.log("Image ouverte avec succès: " + fileName);
+                },
+                error: function (e) {
+                  alert("Erreur d'ouverture : " + JSON.stringify(e));
+                }
+              }
+            );
+          });
+        });
+      }
+    }
+
+    // 👇 Use the function here for each image
+    openImageFromWww("openImageBtn_extrislct", "Ex-tri-slct.png");
+    openImageFromWww("openImageBtn_extrislctpy", "Ex-tri-slct-py.png");
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script src="cordova.js"></script>
+  <link rel="stylesheet" href="style.css">
+  <script src="code.js"></script>
+
+</head>
+<body>
+   <header>
+        <div class="wrapper">
+            <div class="cours_title">
+                <h1 class="tit">
+                    Fonctions usuelles
+                </h1>
+            </div>
+    </div>
+        <a class="fl" href="index.html">
+          <img class="img2" src="panda_bamb.png"  alt="">
+        </a>
+    </header>
+    <h1>Saisie :</h1>
+    <img src="0.png" alt="" class="Intro-Ex-Pc"><button class="syntax_buttons" id="openImageBtn_0">Ouvrir image dans galerie</button>
+    <h1>Produit des diviseurs :</h1>
+    <img src="1.png" alt="" class="Intro-Ex-Pc"><button class="syntax_buttons" id="openImageBtn_1">Ouvrir image dans galerie</button>
+    <h1>Verif alphabétique :</h1>
+    <img src="2.png" alt="" class="Intro-Ex-Pc"><button class="syntax_buttons" id="openImageBtn_2">Ouvrir image dans galerie</button>
+    <h1>Calcul Factoriel :</h1>
+    <img src="3.png" alt="" class="Intro-Ex-Pc"><button class="syntax_buttons" id="openImageBtn_3">Ouvrir image dans galerie</button>
+    <h1>PGCD :</h1>
+    <img src="4.png" alt="" class="Intro-Ex-Pc"><button class="syntax_buttons" id="openImageBtn_4">Ouvrir image dans galerie</button>
+    <h1>Premier :</h1>
+    <img src="5.png" alt="" class="Intro-Ex-Pc"><button class="syntax_buttons" id="openImageBtn_5">Ouvrir image dans galerie</button>
+    <h1> PPCM :</h1>
+    <img src="6.png" alt="" class="Intro-Ex-Pc"><button class="syntax_buttons" id="openImageBtn_6">Ouvrir image dans galerie</button>
+    <h1>Puissance :</h1>
+    <img src="7.png" alt="" class="Intro-Ex-Pc"><button class="syntax_buttons" id="openImageBtn_7">Ouvrir image dans galerie</button>
+    <h1>Calcul nombre Voyelles:</h1>
+    <img src="8.png" alt="" class="Intro-Ex-Pc"><button class="syntax_buttons" id="openImageBtn_8">Ouvrir image dans galerie</button>
+
+    <script>
+  document.addEventListener("deviceready", function () {
+    function openImageFromWww(buttonId, fileName) {
+      const srcPath = cordova.file.applicationDirectory + "www/" + fileName;
+      const destDir = cordova.file.dataDirectory;
+
+      function copyFile(src, dest, callback) {
+        window.resolveLocalFileSystemURL(src, function (fileEntry) {
+          window.resolveLocalFileSystemURL(dest, function (dirEntry) {
+            fileEntry.copyTo(dirEntry, fileName, function (newFileEntry) {
+              callback(null, newFileEntry.nativeURL);
+            }, callback);
+          }, callback);
+        }, callback);
+      }
+
+      const button = document.getElementById(buttonId);
+      if (button) {
+        button.addEventListener("click", function () {
+          copyFile(srcPath, destDir, function (err, copiedFileUrl) {
+            if (err) {
+              alert("Erreur de copie : " + JSON.stringify(err));
+              return;
+            }
+            cordova.plugins.fileOpener2.open(
+              copiedFileUrl,
+              "image/png",
+              {
+                success: function () {
+                  console.log("Image ouverte avec succès: " + fileName);
+                },
+                error: function (e) {
+                  alert("Erreur d'ouverture : " + JSON.stringify(e));
+                }
+              }
+            );
+          });
+        });
+      }
+    }
+
+    // 👇 Use the function here for each image
+    openImageFromWww("openImageBtn_8", "8.png");
+    openImageFromWww("openImageBtn_7", "7.png");
+    openImageFromWww("openImageBtn_6", "6.png");
+    openImageFromWww("openImageBtn_5", "5.png");
+    openImageFromWww("openImageBtn_4", "4.png");
+    openImageFromWww("openImageBtn_3", "3.png");
+    openImageFromWww("openImageBtn_2", "2.png");
+    openImageFromWww("openImageBtn_1", "1.png");
+    openImageFromWww("openImageBtn_0", "0.png");
+  });
+</script>
+</body>
+</html>

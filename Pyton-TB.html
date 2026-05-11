@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script src="cordova.js"></script>
+  <link rel="stylesheet" href="style.css">
+  <script src="code.js"></script>
+
+</head>
+<body>
+   <header>
+        <div class="wrapper">
+            <div class="cours_title">
+                <h1 class="tit">
+                    Les tableaux en Python
+                </h1>
+            </div>
+    </div>
+        <a class="fl" href="cours-TB.html">
+          <img class="img2" src="panda_bamb.png"  alt="">
+        </a>
+    </header>
+
+    <h1>Numpy</h1>
+Pour utiliser des tableaux en Python, il faut utiliser ce qu’on appelle une bibliothèque. <br>
+
+Dans notre cas, il s’agit de <span class="clr">numpy</span> , donc à chaque fois que tu écris du code avec un tableau, tu dois toujours commencer le code par : <br>
+    <img src="numpy.png" class="Intro-Ex-Pc" alt="">
+
+
+<h1>
+    Initialiser un tableau
+</h1>
+Pour initialiser un tableau, on utilise la commande suivante au début du PP : <br>
+
+<img src="array.png" class="Intro-Ex-Pc" alt="">
+
+<i>où N représente le nombre de cases dans le tableau.</i> <br><br>
+
+<span style="color:rgb(148, 7, 7); font-size: x-large;">Attention</span> <br>
+    <div style="border:3px dashed rgb(148,7,7);border-radius: 20px;padding:1%"> 
+        <ul class="intro-list">
+            <li class="intro-list-element">
+                <img src="li-icon.png" class="list-icon" alt="">
+                Si tu initialises un tableau de chaînes de caractères, tu dois écrire <span style="color:green">[str]</span>  et non pas <span style="color:rgb(148, 7, 7)">str[()]</span> .
+                En effet, la seconde forme crée un tableau avec un seul caractère par case, ce qui provoque un comportement incorrect.
+            </li>
+            <li class="intro-list-element">
+                <img src="li-icon.png" class="list-icon" alt="">
+                De plus, tu ne peux pas faire <span class="clr">print(</span>T <Tspan class="clr">)</Tspan>  ou <span class="clr">return(</span> T <span class="clr">)</span>  directement.
+                Les valeurs doivent être traitées une par une à l’aide d’une boucle <span class="clr">for</span> .
+            </li>
+        </ul>
+    </div>
+</body>
+</html>

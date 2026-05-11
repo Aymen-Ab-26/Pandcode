@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script src="cordova.js"></script>
+  <link rel="stylesheet" href="style.css">
+  <script src="code.js"></script>
+
+</head>
+<body>
+   <header>
+        <div class="wrapper">
+            <div class="cours_title">
+                <h1 class="tit">
+                    Introduction Fonctions et Procédures 
+                </h1>
+            </div>
+    </div>
+        <a class="fl" href="cours-FP.html">
+          <img class="img2" src="panda_bamb.png"  alt="">
+        </a>
+    </header>
+    <h1>
+      En général
+    </h1>
+On appelle <span>un module</span> tout bloc de code qui est séparé du programme principal (PP) et qui est utilisé pour <span>diviser le code en petites parties plus faciles à gérer et à déboguer</span>.
+
+<h1>  On distingue deux types de modules :</h1>
+
+<h2>Les fonctions</h2>
+Ce sont comme des machines. Tu leur donnes une ou plusieurs entrées.
+Elles te donnent <span>une seule</span>  sortie. <br>
+
+<h2> Exemple :</h2><br>
+<img src="Intro-Ex-Fn.png" class="Intro-Ex-Fn" alt=""> <br>
+<button  class="syntax_buttons"id="openImageBtn_Py">Ouvrir image dans galerie</button> <br><br>
+
+
+<i>Cette fonction prend un nombre a et un nombre b, et retourne leur somme.</i> <br>
+
+<h1>
+  Les procédures
+</h1>
+Même si elles <span>ressemblent</span>  aux fonctions, les procédures sont plutôt <span>des tâches données à l’ordinateur.</span> 
+
+Ce ne sont pas forcément des machines avec des entrées et une seule sortie. <br>
+<ul class="intro-list">
+  <li class="intro-list-element">
+    <img src="li-icon.png" class="list-icon" alt="">
+    Elles peuvent retourner une valeur, mais ce n’est pas obligatoire :
+  </li>
+  <li class="intro-list-element">
+    <img src="li-icon.png" class="list-icon" alt="">
+    Elles peuvent simplement faire une action sans rien retourner.
+  </li>
+  <li class="intro-list-element">
+    <img src="li-icon.png" class="list-icon" alt="">
+    Elles peuvent aussi retourner <span>plusieurs</span> retours
+  </li>
+</ul>
+
+Exemple : <br>
+<img src="Intro-Ex-Pc.png" class="Intro-Ex-Pc" alt=""><br>
+<button  class="syntax_buttons"id="openImageBtn_Py2">Ouvrir image dans galerie</button> <br><br>
+<i>Par exemple, ce code prend une chaîne de caractères Ch et affiche sa longueur, sans rien retourner.</i>
+<script>
+  document.addEventListener("deviceready", function () {
+    function openImageFromWww(buttonId, fileName) {
+      const srcPath = cordova.file.applicationDirectory + "www/" + fileName;
+      const destDir = cordova.file.dataDirectory;
+
+      function copyFile(src, dest, callback) {
+        window.resolveLocalFileSystemURL(src, function (fileEntry) {
+          window.resolveLocalFileSystemURL(dest, function (dirEntry) {
+            fileEntry.copyTo(dirEntry, fileName, function (newFileEntry) {
+              callback(null, newFileEntry.nativeURL);
+            }, callback);
+          }, callback);
+        }, callback);
+      }
+
+      const button = document.getElementById(buttonId);
+      if (button) {
+        button.addEventListener("click", function () {
+          copyFile(srcPath, destDir, function (err, copiedFileUrl) {
+            if (err) {
+              alert("Erreur de copie : " + JSON.stringify(err));
+              return;
+            }
+            cordova.plugins.fileOpener2.open(
+              copiedFileUrl,
+              "image/png",
+              {
+                success: function () {
+                  console.log("Image ouverte avec succès: " + fileName);
+                },
+                error: function (e) {
+                  alert("Erreur d'ouverture : " + JSON.stringify(e));
+                }
+              }
+            );
+          });
+        });
+      }
+    }
+
+    // 👇 Use the function here for each image
+    openImageFromWww("openImageBtn_Py", "Intro-Ex-Fn.png");
+    openImageFromWww("openImageBtn_Py2", "Intro-Ex-Pc.png");
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="code.js"></script>
+    
+</head>
+<body onload="Speed05()" class="fade">
+    <header>
+        <div class="wrapper">
+        
+        <div class="cours_title">
+            <h1 class="tit">
+                Tri insertion
+            </h1>
+        </div>
+    </div>
+        <a class="fl" href="cours-tri.html">
+          <img class="img2" src="panda_bamb.png"  alt="">
+        </a>
+    </header>
+
+    Le <span class="clr">tri par insértion</span> fonctionne en essayant d’insérer chaque élément à sa position correcte. <br><br>
+
+<h2>
+    Pour un tri croissant :
+</h2>
+Pour chaque elément, on le sauvegarde dans une <span style="color:green">variable temporaire</span> ,
+puis on le fait reculer dans le tableau jusqu’à trouver un element plus grand que lui,
+jusqu’à trouver un élément plus petit que lui (ou le début du tableau). <br>
+<span>On répète ce processus pour tous les éléments.</span> <br>
+
+Cette animation l’explique mieux :
+<div style="width:100%;display: flex; justify-content: space-around;">
+    <button   class="vidCtrls"id="vidPlay" onclick="PlayPause()">Play/Pause</button>
+    <button class="vidCtrls"id="vidReset" onclick="Reset()">Reset</button>
+</div>
+<video src="Insertion Sort Visualization.mp4" muted id="vid_rech_dich"></video> <br>
+
+<h1>Code algo:</h1> <br>
+<img src="Ex-tri-ins.png" class="Intro-Ex-Pc" alt=""> <br>
+<button  class="syntax_buttons"id="openImageBtn_extriins">Ouvrir image dans galerie</button> <br> <br>
+<h1>
+    Python :
+</h1>
+<img src="Ex-tri-ins-py.png" class="Intro-Ex-Pc" alt=""> <br>
+<button  class="syntax_buttons"id="openImageBtn_extriinspy">Ouvrir image dans galerie</button> <br> <br>
+
+<script>
+  document.addEventListener("deviceready", function () {
+    function openImageFromWww(buttonId, fileName) {
+      const srcPath = cordova.file.applicationDirectory + "www/" + fileName;
+      const destDir = cordova.file.dataDirectory;
+
+      function copyFile(src, dest, callback) {
+        window.resolveLocalFileSystemURL(src, function (fileEntry) {
+          window.resolveLocalFileSystemURL(dest, function (dirEntry) {
+            fileEntry.copyTo(dirEntry, fileName, function (newFileEntry) {
+              callback(null, newFileEntry.nativeURL);
+            }, callback);
+          }, callback);
+        }, callback);
+      }
+
+      const button = document.getElementById(buttonId);
+      if (button) {
+        button.addEventListener("click", function () {
+          copyFile(srcPath, destDir, function (err, copiedFileUrl) {
+            if (err) {
+              alert("Erreur de copie : " + JSON.stringify(err));
+              return;
+            }
+            cordova.plugins.fileOpener2.open(
+              copiedFileUrl,
+              "image/png",
+              {
+                success: function () {
+                  console.log("Image ouverte avec succès: " + fileName);
+                },
+                error: function (e) {
+                  alert("Erreur d'ouverture : " + JSON.stringify(e));
+                }
+              }
+            );
+          });
+        });
+      }
+    }
+
+    // 👇 Use the function here for each image
+    openImageFromWww("openImageBtn_extriins", "Ex-tri-ins.png");
+    openImageFromWww("openImageBtn_extriinspy", "Ex-tri-ins-py.png");
+  });
+</script>
+</body>
+</html>

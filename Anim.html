@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>137₈ to Decimal</title>
+  <style>
+    body {
+      background: black;
+      margin: 0;
+      overflow: hidden;
+    }
+    svg {
+      width: 100vw;
+      height: 100vh;
+      display: block;
+    }
+    text {
+      font-family: Arial, sans-serif;
+      fill: white;
+    }
+    .index {
+      fill: red;
+      font-size: 24px;
+    }
+    .fadein {
+      opacity: 0;
+      transition: opacity 2s ease-in;
+    }
+    .visible {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+  <svg viewBox="0 0 800 600">
+    <!-- Digits -->
+    <text id="digit1" x="370" y="250" font-size="100">1</text>
+    <text id="digit3" x="400" y="250" font-size="100">3</text>
+    <text id="digit7" x="430" y="250" font-size="100">7</text>
+
+    <!-- Indices -->
+    <text id="index1" x="377" y="285" class="index">2</text>
+    <text id="index3" x="407" y="285" class="index">1</text>
+    <text id="index7" x="437" y="285" class="index">0</text>
+
+    <!-- Final Expression -->
+    <text id="finalExpr" x="200" y="400" font-size="40" class="fadein">
+      1×8<tspan dy="-15" font-size="20">2</tspan> + 3×8<tspan dy="-15" font-size="20">1</tspan> + 7×8<tspan dy="-15" font-size="20">0</tspan> = 95
+    </text>
+  </svg>
+
+  <script>
+    window.onload = () => {
+      // Animate digits sliding apart
+      setTimeout(() => {
+        document.getElementById("digit1").setAttribute("x", 200);
+        document.getElementById("digit3").setAttribute("x", 370);
+        document.getElementById("digit7").setAttribute("x", 540);
+
+        document.getElementById("index1").setAttribute("x", 207);
+        document.getElementById("index3").setAttribute("x", 377);
+        document.getElementById("index7").setAttribute("x", 547);
+      }, 1000);
+
+      // Fade in final expression
+      setTimeout(() => {
+        document.getElementById("finalExpr").classList.add("visible");
+      }, 3000);
+    };
+  </script>
+</body>
+</html>

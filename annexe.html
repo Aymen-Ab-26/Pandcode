@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script src="cordova.js"></script>
+  <link rel="stylesheet" href="style.css">
+  <script src="code.js"></script>
+
+</head>
+<body>
+   <header>
+        <div class="wrapper">
+            <div class="cours_title">
+                <h1 class="tit">
+                    Annexe
+                </h1>
+            </div>
+    </div>
+        <a class="fl" href="index.html">
+          <img class="img2" src="panda_bamb.png"  alt="">
+        </a>
+    </header>
+
+    <h1>Fonction sur les types numériques :</h1>
+    <img src="fc-pre-num.png" class="Intro-Ex-Pc" alt="">
+    <button  class="syntax_buttons"id="openImageBtn_fc1">Ouvrir image dans galerie</button> <br>
+    <h1>
+        Fonction sur les caractères :
+    </h1>
+    <img src="fc-carac.png" class="Intro-Ex-Pc" alt="">
+    <button  class="syntax_buttons"id="openImageBtn_fc2">Ouvrir image dans galerie</button> <br>
+    <h1>
+        Fonction sur les chaînes de caractères :
+    </h1>
+    <img src="fc-ch.png" class="Intro-Ex-Pc" alt="">
+    <button  class="syntax_buttons"id="openImageBtn_fc3">Ouvrir image dans galerie</button> <br>
+    <h1>
+        QT :
+    </h1>
+    </h1>
+    <img src="qt.png" class="Intro-Ex-Pc" alt="">
+    <button  class="syntax_buttons"id="openImageBtn_qt">Ouvrir image dans galerie</button> <br>
+    <img src="QT1.png" class="Intro-Ex-Pc" alt="">
+    <button  class="syntax_buttons"id="openImageBtn_qt1">Ouvrir image dans galerie</button> <br>
+    <img src="QT2.png" class="Intro-Ex-Pc" alt="">
+    <button  class="syntax_buttons"id="openImageBtn_qt2">Ouvrir image dans galerie</button> <br>
+
+    <script>
+  document.addEventListener("deviceready", function () {
+    function openImageFromWww(buttonId, fileName) {
+      const srcPath = cordova.file.applicationDirectory + "www/" + fileName;
+      const destDir = cordova.file.dataDirectory;
+
+      function copyFile(src, dest, callback) {
+        window.resolveLocalFileSystemURL(src, function (fileEntry) {
+          window.resolveLocalFileSystemURL(dest, function (dirEntry) {
+            fileEntry.copyTo(dirEntry, fileName, function (newFileEntry) {
+              callback(null, newFileEntry.nativeURL);
+            }, callback);
+          }, callback);
+        }, callback);
+      }
+
+      const button = document.getElementById(buttonId);
+      if (button) {
+        button.addEventListener("click", function () {
+          copyFile(srcPath, destDir, function (err, copiedFileUrl) {
+            if (err) {
+              alert("Erreur de copie : " + JSON.stringify(err));
+              return;
+            }
+            cordova.plugins.fileOpener2.open(
+              copiedFileUrl,
+              "image/png",
+              {
+                success: function () {
+                  console.log("Image ouverte avec succès: " + fileName);
+                },
+                error: function (e) {
+                  alert("Erreur d'ouverture : " + JSON.stringify(e));
+                }
+              }
+            );
+          });
+        });
+      }
+    }
+
+    // 👇 Use the function here for each image
+    openImageFromWww("openImageBtn_fc1", "fc-pre-num.png");
+    openImageFromWww("openImageBtn_fc2", "fc-carac.png");
+    openImageFromWww("openImageBtn_fc3", "fc-ch.png");
+    openImageFromWww("openImageBtn_qt", "qt.png");
+    openImageFromWww("openImageBtn_qt1", "QT1.png");
+    openImageFromWww("openImageBtn_qt2", "QT2.png");
+  });
+</script>
+</body>
+</html>

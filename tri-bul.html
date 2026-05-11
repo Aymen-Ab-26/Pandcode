@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="code.js"></script>
+    
+</head>
+<body class="fade">
+    <header>
+        <div class="wrapper">
+        
+        <div class="cours_title">
+            <h1 class="tit">
+                Tri a bulles
+            </h1>
+        </div>
+    </div>
+        <a class="fl" href="cours-tri.html">
+          <img class="img2" src="panda_bamb.png"  alt="">
+        </a>
+    </header>
+
+    Le tri à bulles est un algorithme de tri très simple <br> <br>
+Le but est d’ordonner les éléments d’un tableau. <br><br>
+<h2>
+    Fonctionnement :
+</h2>
+
+Parcourir tout le tableau en comparant <span class="clr">deux éléments à la fois</span> , et les <span class="clr">permuter</span>  si nécessaire. <br>
+En faisant cette procédure, l’élément le plus grand (ou le plus petit, tout dépend si c’est un tri croissant ou décroissant) est placé à l’extrémité du tableau. Cette dernière case est bien placée, on arrête lorseque  <br><br>
+
+Voici une animation qui montre cela : <br> <br>
+<div style="width:100%;display: flex; justify-content: space-around;">
+    <button   class="vidCtrls"id="vidPlay" onclick="PlayPause()">Play/Pause</button>
+    <button class="vidCtrls"id="vidReset" onclick="Reset()">Reset</button>
+</div>
+<video style="filter:invert()" src="Bubble Sort example - Animation Video.mp4" muted id="vid_rech_dich"></video>
+
+<h1>Code algo:</h1> <br>
+<img src="Ex-tri-bul.png" class="Intro-Ex-Pc" alt=""> <br>
+<button  class="syntax_buttons"id="openImageBtn_extribul">Ouvrir image dans galerie</button> <br> <br>
+<h2 style="color:rgb(128, 6, 6)">
+    Pour changer l'ordre du tri il suffit de changer le signe ">" pour un "&lt;"
+</h2>
+<h1>
+    Python :
+</h1>
+<img src="Ex-tri-bul-py.png" class="Intro-Ex-Pc" alt=""> <br>
+<button  class="syntax_buttons"id="openImageBtn_extribul">Ouvrir image dans galerie</button> <br> <br>
+
+<script>
+  document.addEventListener("deviceready", function () {
+    function openImageFromWww(buttonId, fileName) {
+      const srcPath = cordova.file.applicationDirectory + "www/" + fileName;
+      const destDir = cordova.file.dataDirectory;
+
+      function copyFile(src, dest, callback) {
+        window.resolveLocalFileSystemURL(src, function (fileEntry) {
+          window.resolveLocalFileSystemURL(dest, function (dirEntry) {
+            fileEntry.copyTo(dirEntry, fileName, function (newFileEntry) {
+              callback(null, newFileEntry.nativeURL);
+            }, callback);
+          }, callback);
+        }, callback);
+      }
+
+      const button = document.getElementById(buttonId);
+      if (button) {
+        button.addEventListener("click", function () {
+          copyFile(srcPath, destDir, function (err, copiedFileUrl) {
+            if (err) {
+              alert("Erreur de copie : " + JSON.stringify(err));
+              return;
+            }
+            cordova.plugins.fileOpener2.open(
+              copiedFileUrl,
+              "image/png",
+              {
+                success: function () {
+                  console.log("Image ouverte avec succès: " + fileName);
+                },
+                error: function (e) {
+                  alert("Erreur d'ouverture : " + JSON.stringify(e));
+                }
+              }
+            );
+          });
+        });
+      }
+    }
+
+    // 👇 Use the function here for each image
+    openImageFromWww("openImageBtn_extribul", "Ex-tri-bul.png");
+    openImageFromWww("openImageBtn_extribulpy", "Ex-tri-bul-py.png");
+  });
+</script>
+</body>
+</html>

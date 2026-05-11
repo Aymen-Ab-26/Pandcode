@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="code.js"></script>
+    <script src="cordova.js"></script>
+
+</head>
+<body>
+    <header>
+        <div class="wrapper">
+        
+        <div class="cours_title">
+            <h1 class="tit">
+                Le T.D.O
+            </h1>
+        </div>
+    </div>
+        <a class="fl" href="cours-FP.html">
+          <img class="img2" src="panda_bamb.png"  alt="">
+        </a>
+    </header>
+Un <span>T.D.O </span> ou Tableau de Déclaration des Objets est utilisé pour déclarer(spécifier) les variables qui sont créées à l’intérieur d’un module, du programme principal (PP) <br>
+(oui, il est possible d’appeler une fonction à l’intérieur d’une autre).
+
+<h2>On distingue deux types de T.D.O :</h2>
+
+
+<span>T.D.O.L</span> <br><br>
+
+
+
+
+Le <span class="clr">T</span>ableau de <span class="clr">D</span>éclaration des <span class="clr">O</span>bjets <span class="clr">L</span>ocaux est utilisé avec les fonctions ou les procédures. <br>
+
+<h2>Exemple :</h2>
+
+<img src="Ex-TDO-fn.png" alt="" class="Intro-Ex-Pc"> <br>
+<button  class="syntax_buttons"id="openImageBtn_TDO1">Ouvrir image dans galerie</button> <br><br>
+
+
+
+T.D.O.G
+Le Tableau de Déclaration des Objets Globaux est utilisé uniquement avec le programme principal (PP).
+
+<h2>
+    Exemple :
+</h2>
+<img src="Ex-TDO-pc.png" class="Intro-Ex-Pc" alt="">
+<button  class="syntax_buttons"id="openImageBtn_TDO2">Ouvrir image dans galerie</button> <br><br>
+<h1>NB:</h1>
+<i>
+    il est important de noter qu'il est possible et même frequent qu'on écrit "fonction" et "procédure" dans les T.D.O . <br>
+    chaque fonction ou procédure utilisés au niveau du pp ou dans une autre fonction doit être déclarer.
+</i>
+<script>
+  document.addEventListener("deviceready", function () {
+    function openImageFromWww(buttonId, fileName) {
+      const srcPath = cordova.file.applicationDirectory + "www/" + fileName;
+      const destDir = cordova.file.dataDirectory;
+
+      function copyFile(src, dest, callback) {
+        window.resolveLocalFileSystemURL(src, function (fileEntry) {
+          window.resolveLocalFileSystemURL(dest, function (dirEntry) {
+            fileEntry.copyTo(dirEntry, fileName, function (newFileEntry) {
+              callback(null, newFileEntry.nativeURL);
+            }, callback);
+          }, callback);
+        }, callback);
+      }
+
+      const button = document.getElementById(buttonId);
+      if (button) {
+        button.addEventListener("click", function () {
+          copyFile(srcPath, destDir, function (err, copiedFileUrl) {
+            if (err) {
+              alert("Erreur de copie : " + JSON.stringify(err));
+              return;
+            }
+            cordova.plugins.fileOpener2.open(
+              copiedFileUrl,
+              "image/png",
+              {
+                success: function () {
+                  console.log("Image ouverte avec succès: " + fileName);
+                },
+                error: function (e) {
+                  alert("Erreur d'ouverture : " + JSON.stringify(e));
+                }
+              }
+            );
+          });
+        });
+      }
+    }
+
+    // 👇 Use the function here for each image
+    openImageFromWww("openImageBtn_TDO1", "Ex-TDO-fn.png");
+    openImageFromWww("openImageBtn_TDO2", "Ex-TDO-pc.png");
+  });
+</script>
+</body>
+</html>

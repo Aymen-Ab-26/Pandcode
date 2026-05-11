@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script src="cordova.js"></script>
+  <link rel="stylesheet" href="style.css">
+  <script src="code.js"></script>
+
+</head>
+<body onload="Speed()" style="font-size: larger;">
+   <header>
+        <div class="wrapper">
+            <div class="cours_title">
+                <h1 class="tit">
+                    Introduction Recherche dichotomique 
+                </h1>
+            </div>
+    </div>
+        <a class="fl" href="Rc-dich.html">
+          <img class="img2" src="panda_bamb.png"  alt="">
+        </a>
+    </header>
+
+    Une <span class="clr">recherche dichotomique</span>  est un algorithme de recherche beaucoup plus efficace que la recherche séquentielle.
+    <h2 style="color:rgb(114, 7, 7)">
+        Attention
+    </h2>
+    <div style="border:2px dashed rgb(114, 7, 7); padding:2%">
+        la recherche dichotomique ne fonctionne que sur des listes triées, comme celle-ci :
+        <img style="filter:invert()" src="Ex-Tab-trie.png" alt="" class="Intro-Ex-Pc">
+    </div>
+
+L’idée générale est d’essayer de déterminer la zone approximative où se trouve la valeur que l’on cherche, puis de vérifier si elle s’y trouve. <br> <br>
+Cette animation pourrait vous aider à mieux comprendre. <br> <br><br>
+<div style="width:100%;display: flex; justify-content: space-around;">
+    <button   class="vidCtrls"id="vidPlay" onclick="PlayPause()">Play/Pause</button>
+    <button class="vidCtrls"id="vidReset" onclick="Reset()">Reset</button>
+</div>
+<video src="Rech-dich.mp4" muted id="vid_rech_dich"></video>
+
+<h1>Fonctionnement :</h1>
+<ul class="intro-list">
+  <li class="intro-list-element">
+    <img src="li-icon.png" class="list-icon" alt="">
+    Elle fonctionne en divisant le tableau en deux et en comparant la valeur cherchée avec la valeur du milieu.
+</li>
+<li class="intro-list-element">
+    <img src="li-icon.png" class="list-icon" alt="">
+    Puisque le tableau est trié, on peut savoir si la valeur est à gauche ou à droite de cet élément central.
+  </li>
+  <li class="intro-list-element">
+    <img src="li-icon.png" class="list-icon" alt="">
+    Le sous-tableau correspondant devient alors notre nouveau tableau de travail, et on recommence le processus jusqu’à ce qu’on trouve l’élément, ou qu’on ne puisse plus diviser.
+  </li>
+</ul>
+
+</body>
+</html>

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script src="cordova.js"></script>
+  <link rel="stylesheet" href="style.css">
+  <script src="code.js"></script>
+
+</head>
+<body>
+   <header>
+        <div class="wrapper">
+            <div class="cours_title">
+                <h1 class="tit">
+                    Introduction Conversion entre Bases
+                </h1>
+            </div>
+    </div>
+        <a class="fl" href="cours-CNV.html">
+          <img class="img2" src="panda_bamb.png"  alt="">
+        </a>
+    </header>
+<h1>
+    Conversion de base :
+</h1>
+
+Une base est simplement un indicateur du  <span class="clr">nombre de symboles</span> que l’on utilise pour écrire les nombres. <br>
+
+Nous utilisons normalement la <span style="color: cornflowerblue;">base 10</span>  , donc nous avons <span style="color: cornflowerblue;">10 symboles</span> : <br>
+<div class="example">
+    0, 1, 2, 3, 4, 5, 6, 7, 8, 9
+</div> <br>
+
+La  <span style="color:crimson">base 2</span> utilise <span style="color:crimson">deux symboles</span>  : <span style="color:crimson"> 0 </span>  et <span style="color:crimson"> 1 </span> <br>
+
+
+
+La <span style="color:darkslategray">base 8</span> utilise<span style="color:darkslategray"> huit </span>  symboles : de<span style="color:darkslategray"> 0 </span>   à<span style="color:darkslategray"> 7 </span> <br><br> <br>
+
+<i>
+    Pour les bases <span class="clr">supérieures à 10</span> , on utilise <span class="clr">des lettres</span>  pour représenter les nouveaux symboles. <br><br>
+</i>
+Par exemple, la <span style="color:rgb(134, 100, 16)">base 16</span>  contient <span style="color:rgb(134, 100, 16)">16 symboles</span> : <br>
+<span style="color:rgb(134, 100, 16)"> 
+    0
+</span>
+à
+<span style="color:rgb(134, 100, 16)"> 
+    9
+</span>
+puis
+<span style="color:rgb(134, 100, 16)"> 
+    A
+</span>
+,
+<span style="color:rgb(134, 100, 16)"> 
+    B
+</span>
+,
+<span style="color:rgb(134, 100, 16)"> 
+    C
+</span>
+,
+<span style="color:rgb(134, 100, 16)"> 
+    D
+</span>
+,
+<span style="color:rgb(134, 100, 16)"> 
+    E
+</span>
+,
+<span style="color:rgb(134, 100, 16)"> 
+    F
+</span> <br> <br>
+
+<h2>
+    Comprendre l’écriture des nombres :
+</h2>
+
+En base 10, le nombre <span style="color:mediumpurple">657</span>  s’écrit : <br>
+<span style="color:mediumpurple">
+    600
+</span>
++
+<span style="color:mediumpurple">
+    50
+</span>
++
+<span style="color:mediumpurple">
+    7
+</span>
+ <br> <br>
+qu’on peut réécrire sous forme de puissances : <br> <br>
+<div class="example2">
+    <span style="color:mediumpurple">
+        6
+    </span>
+    
+    × 10<span style="color:red">²</span> + <span style="color:mediumpurple">
+        5
+    </span> × 10<span style="color:red">¹</span> + <span style="color:mediumpurple">
+        7
+    </span> × 10<span style="color:red">⁰</span> <br>
+    <i style="font-size: medium;">
+        (puisque x⁰ = 1 pour tout x ≠ 0)
+    </i><br><br>
+</div> <br> <br>
+
+Un nombre comme 1101 en binaire (base 2) s’écrit : <br> <br>
+<div class="example2">
+    <span style="color:mediumpurple">
+        1
+    </span>
+    
+    × 2<span style="color:red">³</span> + <span style="color:mediumpurple">
+        1
+    </span> × 2<span style="color:red">²</span> + <span style="color:mediumpurple">
+        0
+    </span> × 2<span style="color:red">¹</span> + <span style="color:mediumpurple">
+        1
+    </span> × 2<span style="color:red">⁰</span>
+    <i style="font-size: medium;">
+    </i><br>
+<br> 
+<span style="color:darkgrey">
+    8
+</span>
++
+<span style="color:darkgrey">
+    4
+</span>
++
+<span style="color:darkgrey">
+    0
+</span>
++
+<span style="color:darkgrey">
+    1
+</span> = <span style="color:darkgrey">
+    13
+</span>
+ <br> <br>
+</div> 
+<span style="color:brown">
+    On observe donc un schéma clair ici.
+</span> <br><br>
+<img src="form.png" style="filter:invert();" class="Intro-Ex-Pc" alt="">
+    <button  class="syntax_buttons"id="openImageBtn_form">Ouvrir image dans galerie</button> <br>
+
+<h1>
+    Conversion de base 10 vers une autre base B :
+</h1>
+On convertit un nombre <span class="clr">décimal</span>  vers une autre base. <br>
+
+On le fait en <span style="color:crimson">divisant continuellement</span>  le nombre par la base, jusqu’à ce qu’on atteigne un quotient égal à <span style="color:crimson">0</span> . <br> <br>
+
+Ensuite, on lit les restes  <span style="color:yellow">à l’envers</span>  pour obtenir le nombre dans la nouvelle base. <br>
+
+<h2>
+    Exemple : convertir 23 en binaire (base 2) :
+</h2>
+<img src="Ex1.png" class="Intro-Ex-Pc" alt="">
+    <button  class="syntax_buttons"id="openImageBtn_ex1">Ouvrir image dans galerie</button> <br>
+    <h2>
+        Exemple : convertir 834201 en hexadécimal (base 16) :
+    </h2>
+<img src="Ex2.png" class="Intro-Ex-Pc" alt="">
+    <button  class="syntax_buttons"id="openImageBtn_ex2">Ouvrir image dans galerie</button> <br>
+
+<script>
+  document.addEventListener("deviceready", function () {
+    function openImageFromWww(buttonId, fileName) {
+      const srcPath = cordova.file.applicationDirectory + "www/" + fileName;
+      const destDir = cordova.file.dataDirectory;
+
+      function copyFile(src, dest, callback) {
+        window.resolveLocalFileSystemURL(src, function (fileEntry) {
+          window.resolveLocalFileSystemURL(dest, function (dirEntry) {
+            fileEntry.copyTo(dirEntry, fileName, function (newFileEntry) {
+              callback(null, newFileEntry.nativeURL);
+            }, callback);
+          }, callback);
+        }, callback);
+      }
+
+      const button = document.getElementById(buttonId);
+      if (button) {
+        button.addEventListener("click", function () {
+          copyFile(srcPath, destDir, function (err, copiedFileUrl) {
+            if (err) {
+              alert("Erreur de copie : " + JSON.stringify(err));
+              return;
+            }
+            cordova.plugins.fileOpener2.open(
+              copiedFileUrl,
+              "image/png",
+              {
+                success: function () {
+                  console.log("Image ouverte avec succès: " + fileName);
+                },
+                error: function (e) {
+                  alert("Erreur d'ouverture : " + JSON.stringify(e));
+                }
+              }
+            );
+          });
+        });
+      }
+    }
+
+    // 👇 Use the function here for each image
+    openImageFromWww("openImageBtn_ex1", "Ex1.png");
+    openImageFromWww("openImageBtn_ex2", "Ex2.png");
+  });
+</script>
+</body>
+</html>

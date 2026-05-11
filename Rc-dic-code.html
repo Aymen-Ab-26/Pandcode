@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script src="cordova.js"></script>
+  <link rel="stylesheet" href="style.css">
+  <script src="code.js"></script>
+
+</head>
+<body style="font-size: larger;">
+   <header>
+        <div class="wrapper">
+            <div class="cours_title">
+                <h1 class="tit">
+                    Code Recherche dichotomique 
+                </h1>
+            </div>
+    </div>
+        <a class="fl" href="Rc-dich.html">
+          <img class="img2" src="panda_bamb.png"  alt="">
+        </a>
+    </header>
+    <h1>Algo :</h1>
+        <img src="Ex-rc-dc.png" class="Intro-Ex-Pc" alt=""> <br>
+        <button  class="syntax_buttons"id="openImageBtn_exrcdc">Ouvrir image dans galerie</button> <br> <br>
+    <h1>Python :</h1>
+        <img src="Ex-rc-dc-py.png" class="Intro-Ex-Pc" alt=""> <br>
+        <button  class="syntax_buttons"id="openImageBtn_exrcdcpy">Ouvrir image dans galerie</button> <br>        
+<script>
+  document.addEventListener("deviceready", function () {
+    function openImageFromWww(buttonId, fileName) {
+      const srcPath = cordova.file.applicationDirectory + "www/" + fileName;
+      const destDir = cordova.file.dataDirectory;
+
+      function copyFile(src, dest, callback) {
+        window.resolveLocalFileSystemURL(src, function (fileEntry) {
+          window.resolveLocalFileSystemURL(dest, function (dirEntry) {
+            fileEntry.copyTo(dirEntry, fileName, function (newFileEntry) {
+              callback(null, newFileEntry.nativeURL);
+            }, callback);
+          }, callback);
+        }, callback);
+      }
+
+      const button = document.getElementById(buttonId);
+      if (button) {
+        button.addEventListener("click", function () {
+          copyFile(srcPath, destDir, function (err, copiedFileUrl) {
+            if (err) {
+              alert("Erreur de copie : " + JSON.stringify(err));
+              return;
+            }
+            cordova.plugins.fileOpener2.open(
+              copiedFileUrl,
+              "image/png",
+              {
+                success: function () {
+                  console.log("Image ouverte avec succès: " + fileName);
+                },
+                error: function (e) {
+                  alert("Erreur d'ouverture : " + JSON.stringify(e));
+                }
+              }
+            );
+          });
+        });
+      }
+    }
+
+    // 👇 Use the function here for each image
+    openImageFromWww("openImageBtn_exrcdc", "Ex-rc-dc.png");
+    openImageFromWww("openImageBtn_exrcdcpy", "Ex-dc-dc-py.png");
+  });
+</script>
+</body>
+</html>

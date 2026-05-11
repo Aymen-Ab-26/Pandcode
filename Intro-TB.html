@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script src="cordova.js"></script>
+  <link rel="stylesheet" href="style.css">
+  <script src="code.js"></script>
+
+</head>
+<body>
+   <header>
+        <div class="wrapper">
+            <div class="cours_title">
+                <h1 class="tit">
+                    Introduction Tableaux 
+                </h1>
+            </div>
+    </div>
+        <a class="fl" href="cours-TB.html">
+          <img class="img2" src="panda_bamb.png"  alt="">
+        </a>
+    </header>
+    <h1>
+        Le tableau
+    </h1>
+Le tableau est un type de variable. Il est défini comme une collection de valeurs du même type. <br>
+On peut l’imaginer comme une liste de cases alignées les unes à côté des autres, comme ceci :
+
+<img src="Tab-Ex.png" class="Intro-Ex-Pc" alt="">
+    <button  class="syntax_buttons"id="openImageBtn_extb">Ouvrir image dans galerie</button> <br>
+    
+    
+    Il est très utile pour stocker plusieurs valeurs, par exemple : les températures pendant un mois. <br>
+    
+    Chaque case du tableau possède un numéro et une valeur. <br>
+    On appelle ce numéro <span>l’indice </span> : il correspond au rang de la case. <br>
+    
+    En programmation, <span class="clr">es indice commencent presque toujours à 0.</span> l
+    
+    Donc : <br>
+    
+    la première case du tableau a l’indice <span class="clr">0</span>  <br>
+    
+    la suivante a l’indice 1, puis 2, 3, etc., jusqu’à N−1 
+    <i>
+        
+        (où N est le nombre total de cases dans le tableau)
+    </i>
+    
+    <h2>Remplir un tableau</h2>
+    Pour remplir un tableau, on utilise toujours une <span class="clr">procédure.</span>  <br>
+    Voici un exemple :
+    
+    <img src="Ex-Rp-Tb.png" class="Intro-Ex-Pc" alt="">
+    <button  class="syntax_buttons"id="openImageBtn_exrptb">Ouvrir image dans galerie</button> <br>
+    
+    <span style="color:rgb(148, 7, 7); font-size: x-large;">Attention</span> <br>
+    <div style="border:3px dashed rgb(148,7,7);border-radius: 20px;padding:1%">
+        
+        Le tableau est un type de variable <span class="clr">complexe</span> , donc on ne peut pas faire ceci :
+        <ul class="intro-list">
+            <li class="intro-list-element">
+                <img src="li-icon.png" class="list-icon" alt="">
+                écrire(T)
+            </li>
+            <li class="intro-list-element">
+                <img src="li-icon.png" class="list-icon" alt="">
+                lire(T)
+            </li>
+            <li class="intro-list-element">
+                <img src="li-icon.png" class="list-icon" alt="">
+                retourner(T)
+            </li>
+        </ul>
+    </div>
+    
+    
+    
+    À la place, on doit afficher chaque case une par une avec une boucle pour, comme dans cet exemple : <br>
+    
+    <img src="Ex-Ec-Tb.png" class="Intro-Ex-Pc" alt="">
+    <button  class="syntax_buttons"id="openImageBtn_exectb">Ouvrir image dans galerie</button> <br>
+    
+    On peut aussi utiliser le tableau comme paramètre dans d’autres fonctions : <br> <br>
+     <span>exemple : somme(T, N)</span> <br>
+    
+     <h2>Nom du variable tableau</h2>
+Tu as sûrement remarqué que dans les exemples, on a écrit <span class="clr"> tab</span> : c’est simplement le nom de la variable du tableau. <br> <br>
+
+Il s’agit d’un nouveau type, c’est pourquoi on utilise un T.D.N.T <br> <br>
+
+
+
+
+(<span class="clr">T</span>ableau de <span class="clr">D</span>éclaration de <span class="clr">N</span>ouveaux <span class="clr">T</span>ypes). <br>
+<i>
+    Consulte la page TDNT pour plus de détails.
+</i>
+    <script>
+  document.addEventListener("deviceready", function () {
+    function openImageFromWww(buttonId, fileName) {
+      const srcPath = cordova.file.applicationDirectory + "www/" + fileName;
+      const destDir = cordova.file.dataDirectory;
+
+      function copyFile(src, dest, callback) {
+        window.resolveLocalFileSystemURL(src, function (fileEntry) {
+          window.resolveLocalFileSystemURL(dest, function (dirEntry) {
+            fileEntry.copyTo(dirEntry, fileName, function (newFileEntry) {
+              callback(null, newFileEntry.nativeURL);
+            }, callback);
+          }, callback);
+        }, callback);
+      }
+
+      const button = document.getElementById(buttonId);
+      if (button) {
+        button.addEventListener("click", function () {
+          copyFile(srcPath, destDir, function (err, copiedFileUrl) {
+            if (err) {
+              alert("Erreur de copie : " + JSON.stringify(err));
+              return;
+            }
+            cordova.plugins.fileOpener2.open(
+              copiedFileUrl,
+              "image/png",
+              {
+                success: function () {
+                  console.log("Image ouverte avec succès: " + fileName);
+                },
+                error: function (e) {
+                  alert("Erreur d'ouverture : " + JSON.stringify(e));
+                }
+              }
+            );
+          });
+        });
+      }
+    }
+
+    // 👇 Use the function here for each image
+    openImageFromWww("openImageBtn_extb", "Tab-Ex.png");
+    openImageFromWww("openImageBtn_exrptb", "Ex-Rp-Tb.png");
+    openImageFromWww("openImageBtn_exectb", "Ex-Ec-Tb.png");
+  });
+</script>
+</body>
+</html>
