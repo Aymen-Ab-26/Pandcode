@@ -1,50 +1,41 @@
-body{
-    background-color:black;
-    color:white;
-    padding-left: 2%;
-    
+/* ─── Reset & Base ─── */
+*, *::before, *::after {
+  box-sizing: border-box;
 }
+
 html, body {
+  margin: 0;
+  padding: 0;
   overscroll-behavior: none;
+  background-color: black;
+  color: white;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
+
+body {
+  padding-left: 4%;
+  padding-right: 4%;
+}
+
+/* ─── Font ─── */
 @font-face {
   font-family: 'Luckiest Guy';
   src: url('fonts/LuckiestGuy-Regular.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
 }
+
+/* ─── Typography ─── */
+h1 { color: #898AC4; }
+h2 { color: #C4C389; }
+
+span { font-weight: bold; }
+
 .fl {
   font-family: 'Luckiest Guy', cursive;
   color: white;
-  -webkit-text-stroke: 3px black; /* for Chrome, Edge, Safari */
-  letter-spacing:2px;
-}
-
-a {
-  -webkit-tap-highlight-color: transparent; /* remove yellow flash */
-}
-a {
-  -webkit-touch-callout: none; /* disables system callout on long press */
-  user-select: none;           /* don't select text */
-  -webkit-user-select: none;
-}
-ul {
-  list-style: none;
-  padding: 0;
-  margin: 0 auto;
-  width: 90%; /* adjust as needed */
-}
-
-.wrapper {
-  margin: 20px auto;
-  background: linear-gradient(#898AC4, #C4C389);
-  border-radius: 20px;
-  text-align: center;
-  transition: transform 0.2s ease;
-}
-
-.wrapper:hover {
-  transform: scale(1.03);
+  -webkit-text-stroke: 3px black;
+  letter-spacing: 2px;
 }
 
 .fli {
@@ -60,187 +51,242 @@ ul {
   letter-spacing: 2px;
 }
 
-ul,li,a,.wrapper,.panda,.title,button{
-    animation-name: anim;
-    animation-duration: 1.2s;
-    animation-fill-mode: forwards;
+.tit {
+  color: white;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  margin-top: 5%;   /* was 18% — too tall on PC */
+}
+
+.clr { color: #898AC4; }
+
+/* ─── Links ─── */
+a {
+  color: black;
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* ─── Lists ─── */
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto;
+  width: 60%;   /* was 90% — better column width on wide screens */
+}
+
+ul:not(.intro-list) { padding: 0; }
+
+li:not(.intro-list-element, .fl) {
+  border-top: 5px solid #898AC4;
+  border-bottom: 5px solid #C4C389;
+  background-color: white;
+  height: 10%;
+  border-radius: 20px;
+  text-align: center;
+  font-size: 200%;
+}
+
+/* ─── Card / Wrapper ─── */
+.wrapper {
+  margin: 16px auto;
+  max-width: 700px;   /* cap width on large screens */
+  background: linear-gradient(#898AC4, #C4C389);
+  border-radius: 20px;
+  text-align: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+}
+
+.wrapper:hover {
+  transform: scale(1.03);
+  box-shadow: 0 8px 28px rgba(137, 138, 196, 0.45);
+}
+
+/* ─── Animations ─── */
+ul, li, a, .wrapper, .panda, .title, button {
+  animation: anim 1.2s forwards;
 }
 
 @keyframes anim {
-    from{
-        opacity: 0;
-    }
-    to{
-        opacity: 1;
-    }
-}
-.panda{
-    width:45%;
-}
-.logo{
-    display: flex;
-    justify-content: center;
-}
-.index main{
-    margin-top: -15%;
-}
-.index{
-    margin:0;
-    padding: 0;
-    overflow: hidden;
-}
-.title{
-    display: flex;
-    justify-content: center;
-}
-.pndcd{
-    text-align: center;
-    width:50%;
-}
-ul{
-    list-style-type: none;
-}
-a{
-    color:black;
-    text-decoration: none;
-}
-li:not(.intro-list-element,.fl){
-    border-top:5px solid #898AC4;
-    border-bottom:5px solid #C4C389;
-    background-color: white;
-    height:10%;
-    border-radius: 20px;
-    text-align: center;
-    font-size: 200%;
-}
-ul:not(.intro-list){
-    padding:0;
-}
-address{
-    bottom:0;
-    text-align: center;
-    position:absolute;
-    width:100%;
-    font-family: Arial, Helvetica, sans-serif;
-    opacity: 0.3;
-    font-size:15px;
-}
-.IFP{
-    height:100%;
-    height:100%;
-}
-.Big-B{
-    width:200%;
-    height:2000px;
-}
-.btn{
-    position:absolute;
-    bottom:1%;
-    right:5%;
-    width:20%;
-    height:5%;
-    border-radius:20px;
-}
-#openImageBtn{
-    position:absolute;
-    bottom:1%;
-    left:5%;
-    width:20%;
-    height:10%;
-    border-radius:20px;
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 
-.intro-list-element{
-    margin-top: 10%;
-    margin-left: -4%;
+/* ─── Logo / Layout ─── */
+.logo {
+  display: flex;
+  justify-content: center;
 }
-.img1{
-    transform: scaleX(-1);
-}
-.img1,.img2{
-    width:20%;
-}
-.img2{
-    position: absolute;
-    left:2%;
-    transform: scaleX(-1);
-    top:1%;
-}
-.list{
-    margin-top: 30%;
 
+.title {
+  display: flex;
+  justify-content: center;
 }
-span{
-    font-weight: bold;
-}   
-#openImageBtn_dcprc{
-    margin-bottom: 10%;
-}
-.cours_title{
-    color: white;
-    font-size: large;
-    text-align: center;
-}
-h1{
-    color:#898AC4
-}
-h2{
-    color:#C4C389
-}
-.tit{
-    color:white;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    margin-top: 18%;
-}
-*:not(.fli){
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-}
-.py{
-    width:80%
-}
-.list-icon{
-    height:25px;
-}
-.Intro-Ex-Fn,.Intro-Ex-Pc{
-    width:80%;
-    margin: 2% 10%;
-    text-align: center;
 
+.index {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
 }
-.clr{
-    color:#898AC4
+
+.index main {
+  margin-top: -5%;   /* was -15% — too aggressive on PC */
 }
-.syntax_buttons{
-    width:50%;
-    height:40px;
-    margin:3% 25%;
-    background-color: transparent;
-    color:white;
-    border-radius: 20px;
-    border-style: dotted;
-    border-color: #C4C389;
+
+/* ─── Images ─── */
+.panda {
+  width: 20%;   /* was 45% — panda was huge on desktop */
 }
-.vidCtrls{
-    background-color: transparent;
-    color:white;
-    border-radius: 20px;
-    border-style: dotted;
-    border-color: #C4C389;
-    font-size: x-large;
+
+.pndcd {
+  text-align: center;
+  width: 30%;   /* narrower column on PC */
 }
-video{
-    width:100%
+
+.img1 {
+  transform: scaleX(-1);
+  width: 10%;   /* was 20% */
 }
-.example{
-    text-align: center;
-    font-family:'Times New Roman', Times, serif;
-    width:100%;
-    font-size: 150%;
-    color:darksalmon
+
+.img2 {
+  position: absolute;
+  left: 2%;
+  top: 1%;
+  transform: scaleX(-1);
+  width: 10%;   /* was 20% */
 }
-.example2{
-    text-align: center;
-    font-family:'Times New Roman', Times, serif;
-    width:100%;
-    font-size: 150%;
+
+.py { width: 60%; }   /* was 80% */
+
+/* ─── Buttons ─── */
+.btn {
+  position: absolute;
+  bottom: 1%;
+  right: 5%;
+  width: 10%;    /* was 20% */
+  height: 5%;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+#openImageBtn {
+  position: absolute;
+  bottom: 1%;
+  left: 5%;
+  width: 10%;    /* was 20% */
+  height: 5%;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.syntax_buttons {
+  width: 30%;    /* was 50% */
+  height: 40px;
+  margin: 2% 35%;
+  background-color: transparent;
+  color: white;
+  border-radius: 20px;
+  border-style: dotted;
+  border-color: #C4C389;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.syntax_buttons:hover {
+  background-color: #C4C389;
+  color: black;
+}
+
+.vidCtrls {
+  background-color: transparent;
+  color: white;
+  border-radius: 20px;
+  border-style: dotted;
+  border-color: #C4C389;
+  font-size: x-large;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.vidCtrls:hover {
+  background-color: #C4C389;
+  color: black;
+}
+
+/* ─── Media / Video ─── */
+video {
+  width: 70%;      /* was 100% — too stretched on PC */
+  display: block;
+  margin: 0 auto;
+}
+
+/* ─── Content Blocks ─── */
+.Intro-Ex-Fn,
+.Intro-Ex-Pc {
+  width: 55%;      /* was 80% */
+  margin: 2% auto;
+  text-align: center;
+}
+
+.example {
+  text-align: center;
+  font-family: 'Times New Roman', Times, serif;
+  width: 100%;
+  font-size: 150%;
+  color: darksalmon;
+}
+
+.example2 {
+  text-align: center;
+  font-family: 'Times New Roman', Times, serif;
+  width: 100%;
+  font-size: 150%;
+}
+
+.cours_title {
+  color: white;
+  font-size: large;
+  text-align: center;
+}
+
+/* ─── Misc ─── */
+.list {
+  margin-top: 10%;   /* was 30% */
+}
+
+.list-icon {
+  height: 25px;
+}
+
+.intro-list-element {
+  margin-top: 4%;    /* was 10% */
+  margin-left: -4%;
+}
+
+.IFP {
+  height: 100%;
+  width: 100%;
+}
+
+.Big-B {
+  width: 100%;
+  height: 2000px;
+}
+
+#openImageBtn_dcprc {
+  margin-bottom: 4%;
+}
+
+/* ─── Footer ─── */
+address {
+  bottom: 0;
+  text-align: center;
+  position: absolute;
+  width: 100%;
+  font-family: Arial, Helvetica, sans-serif;
+  opacity: 0.3;
+  font-size: 15px;
 }
