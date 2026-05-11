@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <script src="cordova.js"></script>
+  
   <link rel="stylesheet" href="style.css">
   <script src="code.js"></script>
 
@@ -146,7 +146,6 @@ Un nombre comme 1101 en binaire (base 2) s’écrit : <br> <br>
     On observe donc un schéma clair ici.
 </span> <br><br>
 <img src="form.png" style="filter:invert();" class="Intro-Ex-Pc" alt="">
-    <button  class="syntax_buttons"id="openImageBtn_form">Ouvrir image dans galerie</button> <br>
 
 <h1>
     Conversion de base 10 vers une autre base B :
@@ -161,58 +160,11 @@ Ensuite, on lit les restes  <span style="color:yellow">à l’envers</span>  pou
     Exemple : convertir 23 en binaire (base 2) :
 </h2>
 <img src="Ex1.png" class="Intro-Ex-Pc" alt="">
-    <button  class="syntax_buttons"id="openImageBtn_ex1">Ouvrir image dans galerie</button> <br>
     <h2>
         Exemple : convertir 834201 en hexadécimal (base 16) :
     </h2>
 <img src="Ex2.png" class="Intro-Ex-Pc" alt="">
-    <button  class="syntax_buttons"id="openImageBtn_ex2">Ouvrir image dans galerie</button> <br>
 
-<script>
-  document.addEventListener("deviceready", function () {
-    function openImageFromWww(buttonId, fileName) {
-      const srcPath = cordova.file.applicationDirectory + "www/" + fileName;
-      const destDir = cordova.file.dataDirectory;
 
-      function copyFile(src, dest, callback) {
-        window.resolveLocalFileSystemURL(src, function (fileEntry) {
-          window.resolveLocalFileSystemURL(dest, function (dirEntry) {
-            fileEntry.copyTo(dirEntry, fileName, function (newFileEntry) {
-              callback(null, newFileEntry.nativeURL);
-            }, callback);
-          }, callback);
-        }, callback);
-      }
-
-      const button = document.getElementById(buttonId);
-      if (button) {
-        button.addEventListener("click", function () {
-          copyFile(srcPath, destDir, function (err, copiedFileUrl) {
-            if (err) {
-              alert("Erreur de copie : " + JSON.stringify(err));
-              return;
-            }
-            cordova.plugins.fileOpener2.open(
-              copiedFileUrl,
-              "image/png",
-              {
-                success: function () {
-                  console.log("Image ouverte avec succès: " + fileName);
-                },
-                error: function (e) {
-                  alert("Erreur d'ouverture : " + JSON.stringify(e));
-                }
-              }
-            );
-          });
-        });
-      }
-    }
-
-    // 👇 Use the function here for each image
-    openImageFromWww("openImageBtn_ex1", "Ex1.png");
-    openImageFromWww("openImageBtn_ex2", "Ex2.png");
-  });
-</script>
 </body>
 </html>

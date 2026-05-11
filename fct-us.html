@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <script src="cordova.js"></script>
+  
   <link rel="stylesheet" href="style.css">
   <script src="code.js"></script>
 
@@ -40,58 +40,6 @@
     <h1>Calcul nombre Voyelles:</h1>
     <img src="8.png" alt="" class="Intro-Ex-Pc"><button class="syntax_buttons" id="openImageBtn_8">Ouvrir image dans galerie</button>
 
-    <script>
-  document.addEventListener("deviceready", function () {
-    function openImageFromWww(buttonId, fileName) {
-      const srcPath = cordova.file.applicationDirectory + "www/" + fileName;
-      const destDir = cordova.file.dataDirectory;
-
-      function copyFile(src, dest, callback) {
-        window.resolveLocalFileSystemURL(src, function (fileEntry) {
-          window.resolveLocalFileSystemURL(dest, function (dirEntry) {
-            fileEntry.copyTo(dirEntry, fileName, function (newFileEntry) {
-              callback(null, newFileEntry.nativeURL);
-            }, callback);
-          }, callback);
-        }, callback);
-      }
-
-      const button = document.getElementById(buttonId);
-      if (button) {
-        button.addEventListener("click", function () {
-          copyFile(srcPath, destDir, function (err, copiedFileUrl) {
-            if (err) {
-              alert("Erreur de copie : " + JSON.stringify(err));
-              return;
-            }
-            cordova.plugins.fileOpener2.open(
-              copiedFileUrl,
-              "image/png",
-              {
-                success: function () {
-                  console.log("Image ouverte avec succès: " + fileName);
-                },
-                error: function (e) {
-                  alert("Erreur d'ouverture : " + JSON.stringify(e));
-                }
-              }
-            );
-          });
-        });
-      }
-    }
-
-    // 👇 Use the function here for each image
-    openImageFromWww("openImageBtn_8", "8.png");
-    openImageFromWww("openImageBtn_7", "7.png");
-    openImageFromWww("openImageBtn_6", "6.png");
-    openImageFromWww("openImageBtn_5", "5.png");
-    openImageFromWww("openImageBtn_4", "4.png");
-    openImageFromWww("openImageBtn_3", "3.png");
-    openImageFromWww("openImageBtn_2", "2.png");
-    openImageFromWww("openImageBtn_1", "1.png");
-    openImageFromWww("openImageBtn_0", "0.png");
-  });
-</script>
+   
 </body>
 </html>

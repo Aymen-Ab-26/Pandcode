@@ -6,7 +6,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
     <script src="code.js"></script>
-    <script src="cordova.js"></script>
+    
 
 </head>
 <body>
@@ -18,7 +18,6 @@
         La syntaxe des fonctions
     </h1><br>
     <img src="declfn.png" class="Intro-Ex-Pc" alt=""> <br>
-<button  class="syntax_buttons"id="openImageBtn_dclfn">Ouvrir image dans galerie</button> <br>
 
 Une fonction prend des paramètres formels (ceux qui sont écrits entre parenthèses en haut) avec des types de variables précisés. Devant, on indique le type de retour de la fonction. <br>
 Par exemple, si la fonction renvoie une chaîne de caractères, on écrit « chaîne de caractères ». <br>
@@ -29,7 +28,6 @@ Elle commence par le mot Début et se termine par Fin, qui vient toujours après
 </span>
 <h2>Exemple d'une fonction :</h2>
 <img src="ExFn.png" class="Intro-Ex-Pc" alt=""><br>
-<button  class="syntax_buttons"id="openImageBtn_exfn">Ouvrir image dans galerie</button> <br>
 
 <h2>
     Appel d'une fonction
@@ -49,7 +47,6 @@ Quand le programme arrive à cette ligne, la fonction exemple s’exécute, et s
     Les procédures
 </h1> <br>
 <img src="decl_proc.png" class="Intro-Ex-Pc" alt=""> <br>
-<button  class="syntax_buttons"id="openImageBtn_dcprc">Ouvrir image dans galerie</button> <br>
 
 Contrairement aux fonctions, les procédures n’ont pas de ligne retourner(). <br>
 
@@ -60,7 +57,6 @@ On appelle cela un passage par adresse (ce n’est pas un détail essentiel à r
 
     <h2>Exemple : </h2><br>
     <img src="ExPc.png" class="Intro-Ex-Pc" alt="">
-    <button  class="syntax_buttons"id="openImageBtn_expc">Ouvrir image dans galerie</button> <br>
 
     Cette procédure renvoie une chaîne de caractères.
 </i>
@@ -80,54 +76,6 @@ Quand on appelle une procédure, on l’écrit de la façon suivante : <br> <br>
 <span>
     Comme les fonctions, les procédures doivent aussi être accompagnées de leur TDO.
 </span>
-<script>
-  document.addEventListener("deviceready", function () {
-    function openImageFromWww(buttonId, fileName) {
-      const srcPath = cordova.file.applicationDirectory + "www/" + fileName;
-      const destDir = cordova.file.dataDirectory;
-
-      function copyFile(src, dest, callback) {
-        window.resolveLocalFileSystemURL(src, function (fileEntry) {
-          window.resolveLocalFileSystemURL(dest, function (dirEntry) {
-            fileEntry.copyTo(dirEntry, fileName, function (newFileEntry) {
-              callback(null, newFileEntry.nativeURL);
-            }, callback);
-          }, callback);
-        }, callback);
-      }
-
-      const button = document.getElementById(buttonId);
-      if (button) {
-        button.addEventListener("click", function () {
-          copyFile(srcPath, destDir, function (err, copiedFileUrl) {
-            if (err) {
-              alert("Erreur de copie : " + JSON.stringify(err));
-              return;
-            }
-            cordova.plugins.fileOpener2.open(
-              copiedFileUrl,
-              "image/png",
-              {
-                success: function () {
-                  console.log("Image ouverte avec succès: " + fileName);
-                },
-                error: function (e) {
-                  alert("Erreur d'ouverture : " + JSON.stringify(e));
-                }
-              }
-            );
-          });
-        });
-      }
-    }
-
-    // 👇 Use the function here for each image
-    openImageFromWww("openImageBtn_dclfn", "declfn.png");
-    openImageFromWww("openImageBtn_exfn", "ExFn.png");
-    openImageFromWww("openImageBtn_dcprc", "decl_proc.png");
-    openImageFromWww("openImageBtn_expc", "ExPc.png");
-  });
-</script>
 
 </body>
 </html>

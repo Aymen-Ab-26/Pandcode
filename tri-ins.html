@@ -42,58 +42,11 @@ Cette animation l’explique mieux :
 
 <h1>Code algo:</h1> <br>
 <img src="Ex-tri-ins.png" class="Intro-Ex-Pc" alt=""> <br>
-<button  class="syntax_buttons"id="openImageBtn_extriins">Ouvrir image dans galerie</button> <br> <br>
 <h1>
     Python :
 </h1>
 <img src="Ex-tri-ins-py.png" class="Intro-Ex-Pc" alt=""> <br>
-<button  class="syntax_buttons"id="openImageBtn_extriinspy">Ouvrir image dans galerie</button> <br> <br>
 
-<script>
-  document.addEventListener("deviceready", function () {
-    function openImageFromWww(buttonId, fileName) {
-      const srcPath = cordova.file.applicationDirectory + "www/" + fileName;
-      const destDir = cordova.file.dataDirectory;
 
-      function copyFile(src, dest, callback) {
-        window.resolveLocalFileSystemURL(src, function (fileEntry) {
-          window.resolveLocalFileSystemURL(dest, function (dirEntry) {
-            fileEntry.copyTo(dirEntry, fileName, function (newFileEntry) {
-              callback(null, newFileEntry.nativeURL);
-            }, callback);
-          }, callback);
-        }, callback);
-      }
-
-      const button = document.getElementById(buttonId);
-      if (button) {
-        button.addEventListener("click", function () {
-          copyFile(srcPath, destDir, function (err, copiedFileUrl) {
-            if (err) {
-              alert("Erreur de copie : " + JSON.stringify(err));
-              return;
-            }
-            cordova.plugins.fileOpener2.open(
-              copiedFileUrl,
-              "image/png",
-              {
-                success: function () {
-                  console.log("Image ouverte avec succès: " + fileName);
-                },
-                error: function (e) {
-                  alert("Erreur d'ouverture : " + JSON.stringify(e));
-                }
-              }
-            );
-          });
-        });
-      }
-    }
-
-    // 👇 Use the function here for each image
-    openImageFromWww("openImageBtn_extriins", "Ex-tri-ins.png");
-    openImageFromWww("openImageBtn_extriinspy", "Ex-tri-ins-py.png");
-  });
-</script>
 </body>
 </html>

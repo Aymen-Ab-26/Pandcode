@@ -6,7 +6,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
     <script src="code.js"></script>
-    <script src="cordova.js"></script>
+    
 
 </head>
 <body>
@@ -39,7 +39,6 @@ Le <span class="clr">T</span>ableau de <span class="clr">D</span>éclaration des
 <h2>Exemple :</h2>
 
 <img src="Ex-TDO-fn.png" alt="" class="Intro-Ex-Pc"> <br>
-<button  class="syntax_buttons"id="openImageBtn_TDO1">Ouvrir image dans galerie</button> <br><br>
 
 
 
@@ -50,57 +49,11 @@ Le Tableau de Déclaration des Objets Globaux est utilisé uniquement avec le pr
     Exemple :
 </h2>
 <img src="Ex-TDO-pc.png" class="Intro-Ex-Pc" alt="">
-<button  class="syntax_buttons"id="openImageBtn_TDO2">Ouvrir image dans galerie</button> <br><br>
 <h1>NB:</h1>
 <i>
     il est important de noter qu'il est possible et même frequent qu'on écrit "fonction" et "procédure" dans les T.D.O . <br>
     chaque fonction ou procédure utilisés au niveau du pp ou dans une autre fonction doit être déclarer.
 </i>
-<script>
-  document.addEventListener("deviceready", function () {
-    function openImageFromWww(buttonId, fileName) {
-      const srcPath = cordova.file.applicationDirectory + "www/" + fileName;
-      const destDir = cordova.file.dataDirectory;
 
-      function copyFile(src, dest, callback) {
-        window.resolveLocalFileSystemURL(src, function (fileEntry) {
-          window.resolveLocalFileSystemURL(dest, function (dirEntry) {
-            fileEntry.copyTo(dirEntry, fileName, function (newFileEntry) {
-              callback(null, newFileEntry.nativeURL);
-            }, callback);
-          }, callback);
-        }, callback);
-      }
-
-      const button = document.getElementById(buttonId);
-      if (button) {
-        button.addEventListener("click", function () {
-          copyFile(srcPath, destDir, function (err, copiedFileUrl) {
-            if (err) {
-              alert("Erreur de copie : " + JSON.stringify(err));
-              return;
-            }
-            cordova.plugins.fileOpener2.open(
-              copiedFileUrl,
-              "image/png",
-              {
-                success: function () {
-                  console.log("Image ouverte avec succès: " + fileName);
-                },
-                error: function (e) {
-                  alert("Erreur d'ouverture : " + JSON.stringify(e));
-                }
-              }
-            );
-          });
-        });
-      }
-    }
-
-    // 👇 Use the function here for each image
-    openImageFromWww("openImageBtn_TDO1", "Ex-TDO-fn.png");
-    openImageFromWww("openImageBtn_TDO2", "Ex-TDO-pc.png");
-  });
-</script>
 </body>
 </html>

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <script src="cordova.js"></script>
+  
   <link rel="stylesheet" href="style.css">
   <script src="code.js"></script>
 
@@ -28,7 +28,6 @@ Le tableau est un type de variable. Il est défini comme une collection de valeu
 On peut l’imaginer comme une liste de cases alignées les unes à côté des autres, comme ceci :
 
 <img src="Tab-Ex.png" class="Intro-Ex-Pc" alt="">
-    <button  class="syntax_buttons"id="openImageBtn_extb">Ouvrir image dans galerie</button> <br>
     
     
     Il est très utile pour stocker plusieurs valeurs, par exemple : les températures pendant un mois. <br>
@@ -53,7 +52,6 @@ On peut l’imaginer comme une liste de cases alignées les unes à côté des a
     Voici un exemple :
     
     <img src="Ex-Rp-Tb.png" class="Intro-Ex-Pc" alt="">
-    <button  class="syntax_buttons"id="openImageBtn_exrptb">Ouvrir image dans galerie</button> <br>
     
     <span style="color:rgb(148, 7, 7); font-size: x-large;">Attention</span> <br>
     <div style="border:3px dashed rgb(148,7,7);border-radius: 20px;padding:1%">
@@ -80,7 +78,6 @@ On peut l’imaginer comme une liste de cases alignées les unes à côté des a
     À la place, on doit afficher chaque case une par une avec une boucle pour, comme dans cet exemple : <br>
     
     <img src="Ex-Ec-Tb.png" class="Intro-Ex-Pc" alt="">
-    <button  class="syntax_buttons"id="openImageBtn_exectb">Ouvrir image dans galerie</button> <br>
     
     On peut aussi utiliser le tableau comme paramètre dans d’autres fonctions : <br> <br>
      <span>exemple : somme(T, N)</span> <br>
@@ -97,52 +94,5 @@ Il s’agit d’un nouveau type, c’est pourquoi on utilise un T.D.N.T <br> <br
 <i>
     Consulte la page TDNT pour plus de détails.
 </i>
-    <script>
-  document.addEventListener("deviceready", function () {
-    function openImageFromWww(buttonId, fileName) {
-      const srcPath = cordova.file.applicationDirectory + "www/" + fileName;
-      const destDir = cordova.file.dataDirectory;
-
-      function copyFile(src, dest, callback) {
-        window.resolveLocalFileSystemURL(src, function (fileEntry) {
-          window.resolveLocalFileSystemURL(dest, function (dirEntry) {
-            fileEntry.copyTo(dirEntry, fileName, function (newFileEntry) {
-              callback(null, newFileEntry.nativeURL);
-            }, callback);
-          }, callback);
-        }, callback);
-      }
-
-      const button = document.getElementById(buttonId);
-      if (button) {
-        button.addEventListener("click", function () {
-          copyFile(srcPath, destDir, function (err, copiedFileUrl) {
-            if (err) {
-              alert("Erreur de copie : " + JSON.stringify(err));
-              return;
-            }
-            cordova.plugins.fileOpener2.open(
-              copiedFileUrl,
-              "image/png",
-              {
-                success: function () {
-                  console.log("Image ouverte avec succès: " + fileName);
-                },
-                error: function (e) {
-                  alert("Erreur d'ouverture : " + JSON.stringify(e));
-                }
-              }
-            );
-          });
-        });
-      }
-    }
-
-    // 👇 Use the function here for each image
-    openImageFromWww("openImageBtn_extb", "Tab-Ex.png");
-    openImageFromWww("openImageBtn_exrptb", "Ex-Rp-Tb.png");
-    openImageFromWww("openImageBtn_exectb", "Ex-Ec-Tb.png");
-  });
-</script>
 </body>
 </html>

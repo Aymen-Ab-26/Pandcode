@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <script src="cordova.js"></script>
+  
   <link rel="stylesheet" href="style.css">
   <script src="code.js"></script>
 
@@ -34,7 +34,6 @@ Elles te donnent <span>une seule</span>  sortie. <br>
 
 <h2> Exemple :</h2><br>
 <img src="Intro-Ex-Fn.png" class="Intro-Ex-Fn" alt=""> <br>
-<button  class="syntax_buttons"id="openImageBtn_Py">Ouvrir image dans galerie</button> <br><br>
 
 
 <i>Cette fonction prend un nombre a et un nombre b, et retourne leur somme.</i> <br>
@@ -62,53 +61,7 @@ Ce ne sont pas forcément des machines avec des entrées et une seule sortie. <b
 
 Exemple : <br>
 <img src="Intro-Ex-Pc.png" class="Intro-Ex-Pc" alt=""><br>
-<button  class="syntax_buttons"id="openImageBtn_Py2">Ouvrir image dans galerie</button> <br><br>
 <i>Par exemple, ce code prend une chaîne de caractères Ch et affiche sa longueur, sans rien retourner.</i>
-<script>
-  document.addEventListener("deviceready", function () {
-    function openImageFromWww(buttonId, fileName) {
-      const srcPath = cordova.file.applicationDirectory + "www/" + fileName;
-      const destDir = cordova.file.dataDirectory;
 
-      function copyFile(src, dest, callback) {
-        window.resolveLocalFileSystemURL(src, function (fileEntry) {
-          window.resolveLocalFileSystemURL(dest, function (dirEntry) {
-            fileEntry.copyTo(dirEntry, fileName, function (newFileEntry) {
-              callback(null, newFileEntry.nativeURL);
-            }, callback);
-          }, callback);
-        }, callback);
-      }
-
-      const button = document.getElementById(buttonId);
-      if (button) {
-        button.addEventListener("click", function () {
-          copyFile(srcPath, destDir, function (err, copiedFileUrl) {
-            if (err) {
-              alert("Erreur de copie : " + JSON.stringify(err));
-              return;
-            }
-            cordova.plugins.fileOpener2.open(
-              copiedFileUrl,
-              "image/png",
-              {
-                success: function () {
-                  console.log("Image ouverte avec succès: " + fileName);
-                },
-                error: function (e) {
-                  alert("Erreur d'ouverture : " + JSON.stringify(e));
-                }
-              }
-            );
-          });
-        });
-      }
-    }
-
-    // 👇 Use the function here for each image
-    openImageFromWww("openImageBtn_Py", "Intro-Ex-Fn.png");
-    openImageFromWww("openImageBtn_Py2", "Intro-Ex-Pc.png");
-  });
-</script>
 </body>
 </html>
